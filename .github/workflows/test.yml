@@ -19,7 +19,7 @@ jobs:
         run: xcodebuild test -project XCTestExample.xcodeproj/ -scheme XCTestExample -resultBundlePath TestResults -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 8"
         
         
-      - uses: kishikawakatsumi/xcresulttool@v1.0.3
+      - uses: kishikawakatsumi/xcresulttool@v1.1.0
         with:
           path: TestResults.xcresult
         if: success() || failure()
