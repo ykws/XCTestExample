@@ -30,6 +30,13 @@ class XCTestExampleTests: XCTestCase {
         XCTAssertEqual(counter.count, -1)
     }
 
+    func testCounterSquare() throws {
+        var counter = Counter()
+        counter.minus()
+        counter.square()
+        XCTAssertEqual(counter.count, 1)
+    }
+
     func testCounterReset() throws {
         var counter = Counter()
         counter.plus()

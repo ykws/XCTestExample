@@ -18,6 +18,10 @@ struct Counter {
         count -= 1
     }
     
+    mutating func square() {
+        count *= count
+    }
+
     mutating func reset() {
         count = 0
     }
