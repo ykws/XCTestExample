@@ -11,11 +11,11 @@ struct Counter {
     var count: Int = 0
     
     mutating func plus() {
-        count += 1
+        count += 2
     }
     
     mutating func minus() {
-        count -= 1
+        count -= 2
     }
     
     mutating func reset() {
