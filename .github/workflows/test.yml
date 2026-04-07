@@ -18,7 +18,12 @@ jobs:
       - name: Test
         run: xcodebuild test -project XCTestExample.xcodeproj/ -scheme XCTestExample -resultBundlePath TestResults -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 17"
         
-      - uses: slidoapp/xcresulttool@v3.1.1
+      - name: Export summary JSON
+        run: |
+          xcrun xcresulttool get test-results summary \
+            --path TestResults.xcresult > summary.json
+
+      - name: Pretty print xcresult summary
+        uses: ./.github/actions/pretty-xcresult
         with:
-          path: TestResults.xcresult
-        if: success() || failure()
+          summary-path: summary.json
