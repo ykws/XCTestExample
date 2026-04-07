@@ -18,7 +18,7 @@ jobs:
       - name: Test
         run: xcodebuild test -project XCTestExample.xcodeproj/ -scheme XCTestExample -resultBundlePath TestResults.xcresult -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 17"
         
-      - uses: kishikawakatsumi/xcresulttool@v1
+      - uses: slidoapp/xcresulttool@v3
         with:
           path: TestResults.xcresult
         if: success() || failure()
