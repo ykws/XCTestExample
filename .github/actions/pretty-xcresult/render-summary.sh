@@ -27,7 +27,7 @@ EOF
 DURATION="$(awk "BEGIN {printf \"%.2fs\", $END - $START}")"
 
 {
-  echo "## Testing project $TITLE with scheme $TITLE"
+  echo "## Testing scheme $TITLE"
   echo ""
   echo "### Summary"
   echo ""
