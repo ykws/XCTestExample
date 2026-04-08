@@ -17,21 +17,28 @@ jobs:
 
       - name: Test
         run: xcodebuild test -project XCTestExample.xcodeproj/ -scheme XCTestExample -resultBundlePath TestResults -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 17"
-        
+
       - name: Export summary JSON
+        if: always()
+        continue-on-error: true
         run: |
           xcrun xcresulttool get test-results summary \
             --path TestResults.xcresult > summary.json
 
       - name: Export tests JSON
+        if: always()
+        continue-on-error: true
         run: |
           xcrun xcresulttool get test-results tests \
             --path TestResults.xcresult > tests.json
 
       - name: Export coverage JSON
+        if: always()
+        continue-on-error: true
         run: xcrun xccov view --report --json TestResults.xcresult > coverage.json
 
       - name: Pretty print xcresult summary
+        if: always()
         uses: ./.github/actions/pretty-xcresult
         with:
           summary-path: summary.json
