@@ -4,7 +4,7 @@ set -euo pipefail
 SUMMARY_PATH="${1:?summary json path is required}"
 
 # まとめて抜く
-read -r TOTAL PASSED FAILED SKIPPED EXPECTED START END TITLE DEVICE OS BUILD PLATFORM CONFIG <<EOF
+IFS=$'\t' read -r TOTAL PASSED FAILED SKIPPED EXPECTED START END TITLE DEVICE OS BUILD PLATFORM CONFIG <<EOF
 $(jq -r '
 [
   (.totalTestCount // 0),
