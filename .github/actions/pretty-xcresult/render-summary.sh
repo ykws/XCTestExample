@@ -31,7 +31,7 @@ cat <<EOF >> "$GITHUB_STEP_SUMMARY"
 
 ### Summary
 
-| Total | Passed | Failed | Skipped | Expected Failure | Time |
+| Total | ✅ Passed | ❌ Failed | ⏭️ Skipped | 🔶 Expected Failure | ⏱️ Time |
 | ---: | ---: | ---: | ---: | ---: | ---: |
 | $TOTAL | $PASSED | $FAILED | $SKIPPED | $EXPECTED | $DURATION |
 

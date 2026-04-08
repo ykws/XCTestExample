@@ -1,10 +1,18 @@
 name: pretty-xcresult-action
-description: Render xcresult summary JSON to GitHub job summary
+description: Render xcresult JSON outputs to GitHub job summary
 
 inputs:
   summary-path:
-    description: Path to xcresult summary JSON
+    description: Path to summary JSON (xcresulttool get test-results summary)
     required: true
+  tests-path:
+    description: Path to tests JSON (xcresulttool get test-results tests)
+    required: false
+    default: ''
+  coverage-path:
+    description: Path to coverage JSON (xccov view --report --json)
+    required: false
+    default: ''
 
 runs:
   using: composite
@@ -14,3 +22,17 @@ runs:
       run: |
         chmod +x "${{ github.action_path }}/render-summary.sh"
         "${{ github.action_path }}/render-summary.sh" "${{ inputs.summary-path }}"
+
+    - name: Render tests markdown
+      if: inputs.tests-path != ''
+      shell: bash
+      run: |
+        chmod +x "${{ github.action_path }}/render-tests.sh"
+        "${{ github.action_path }}/render-tests.sh" "${{ inputs.tests-path }}"
+
+    - name: Render coverage markdown
+      if: inputs.coverage-path != ''
+      shell: bash
+      run: |
+        chmod +x "${{ github.action_path }}/render-coverage.sh"
+        "${{ github.action_path }}/render-coverage.sh" "${{ inputs.coverage-path }}"

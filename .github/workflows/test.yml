@@ -23,7 +23,17 @@ jobs:
           xcrun xcresulttool get test-results summary \
             --path TestResults.xcresult > summary.json
 
+      - name: Export tests JSON
+        run: |
+          xcrun xcresulttool get test-results tests \
+            --path TestResults.xcresult > tests.json
+
+      - name: Export coverage JSON
+        run: xcrun xccov view --report --json TestResults.xcresult > coverage.json
+
       - name: Pretty print xcresult summary
         uses: ./.github/actions/pretty-xcresult
         with:
           summary-path: summary.json
+          tests-path: tests.json
+          coverage-path: coverage.json
