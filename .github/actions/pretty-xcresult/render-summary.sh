@@ -26,27 +26,26 @@ EOF
 
 DURATION="$(awk "BEGIN {printf \"%.2fs\", $END - $START}")"
 
-cat <<EOF >> "$GITHUB_STEP_SUMMARY"
-## Testing project $TITLE with scheme $TITLE
-
-### Summary
-
-| Total | ✅ Passed | ❌ Failed | ⏭️ Skipped | 🔶 Expected Failure | ⏱️ Time |
-| ---: | ---: | ---: | ---: | ---: | ---: |
-| $TOTAL | $PASSED | $FAILED | $SKIPPED | $EXPECTED | $DURATION |
-
-### Devices
-
-- **Device:** $DEVICE, $OS ($BUILD)
-- **Platform:** $PLATFORM
-- **Configuration:** $CONFIG
-
-### Failures
-
-EOF
-
-if [ "$FAILED" -eq 0 ]; then
-  echo "All tests passed :tada:" >> "$GITHUB_STEP_SUMMARY"
-else
-  echo "$FAILED test(s) failed" >> "$GITHUB_STEP_SUMMARY"
-fi
+{
+  echo "## Testing project $TITLE with scheme $TITLE"
+  echo ""
+  echo "### Summary"
+  echo ""
+  echo "| Total | ✅ Passed | ❌ Failed | ⏭️ Skipped | 🔶 Expected Failure | ⏱️ Time |"
+  echo "| ---: | ---: | ---: | ---: | ---: | ---: |"
+  echo "| $TOTAL | $PASSED | $FAILED | $SKIPPED | $EXPECTED | $DURATION |"
+  echo ""
+  echo "### Devices"
+  echo ""
+  echo "- **Device:** $DEVICE, $OS ($BUILD)"
+  echo "- **Platform:** $PLATFORM"
+  echo "- **Configuration:** $CONFIG"
+  echo ""
+  echo "### Failures"
+  echo ""
+  if [ "$FAILED" -eq 0 ]; then
+    echo "All tests passed :tada:"
+  else
+    echo "$FAILED test(s) failed"
+  fi
+} >> "$GITHUB_STEP_SUMMARY"
